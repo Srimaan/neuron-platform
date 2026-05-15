@@ -1,0 +1,40 @@
+[project]
+name = "neuron-mcp-server"
+version = "0.1.0"
+description = "Neuron Model Context Protocol (MCP) server built with FastMCP."
+requires-python = ">=3.11"
+dependencies = [
+    "fastmcp>=0.9.0,<3",
+    "httpx>=0.27.0",
+    "pydantic>=2.6.0",
+    "pydantic-settings>=2.2.0",
+    "python-dotenv>=1.0.0",
+    "pygithub>=2.3.0",
+    "jira>=3.8.0",
+    "slack-sdk>=3.27.0",
+]
+
+[project.scripts]
+neuron-mcp = "mcp_server.main:main"
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0.0",
+    "pytest-asyncio>=0.24.0",
+    "ruff>=0.8.0",
+]
+
+[build-system]
+requires = ["hatchling>=1.26"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["mcp_server"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
